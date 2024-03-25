@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/spa-img.appspot.com/o/fondo3.jpg?alt=media&token=4fbf2c60-ed55-4663-8e3b-f41293834d69');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Esto evita que la imagen se mueva al hacer scroll */
+  }
+/* Estilo para el header y footer */
+.header,
+.footer {
+  background-color: rgba(211, 211, 211, 0.5); /* Color gris claro con transparencia */
+  backdrop-filter: blur(10px); /* Borde difuminado */
+  padding: 20px; /* Espaciado interno */
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Asegura que el header esté por encima de otros elementos */
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  }
+
+.rounded-bg {
+    background-color: #f7f7f7; /* Color de fondo */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 20px; /* Espaciado interno */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+  
+  
