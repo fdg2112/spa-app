@@ -1,29 +1,33 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-contact',
+  standalone: true,
+  imports: [ ReactiveFormsModule, HttpClientModule ],
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css']
 })
+
 export class ContactComponent {
-  formData = {
-    desde: '',
-    para: 'fdg2112@gmail.com', // Cambia esto por tu dirección de correo
-    titulo: '',
-    mensaje: ''
-  };
-
-  constructor(private http: HttpClient) { }
-
-  enviarCorreo() {
-    this.http.post<any>('http://localhost:3000/procesar-email', this.formData)
-      .subscribe(response => {
-        console.log('Correo enviado con éxito:', response);
-        // Aquí podrías mostrar un mensaje de éxito o redirigir a otra página
-      }, error => {
-        console.error('Error al enviar correo:', error);
-        // Aquí podrías mostrar un mensaje de error al usuario
-      });
+  emailData: FormGroup;
+  constructor (private httpClient: HttpClient){
+    this.emailData = new FormGroup({
+      name: new FormControl('',Validators.required),
+      email: new FormControl('',[Validators.required,Validators.email]),
+      message: new FormControl('',Validators.required)
+    });
   }
-}
+
+  sendEmail(){
+    let params = {
+      name: this.emailData.value.name,
+      email: this.emailData.value.email,
+      message: this.emailData.value.message
+    }
+    this.httpClient.post('http://localhost:4200/',params).subscribe(resp=>{
+      console.log(resp)
+    })
+  }
+};
